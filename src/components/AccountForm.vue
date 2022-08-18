@@ -29,6 +29,7 @@
 <script>
 import { ref, watchEffect } from 'vue';
 import { AppState } from '../AppState';
+import { router } from '../router.js';
 import { accountService } from '../services/AccountService';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
@@ -47,6 +48,7 @@ export default {
       async handleSubmit() {
         try {
           await accountService.editAccount(editable.value)
+          router.push({name: 'Profile', params: { profileId: editable.value.id}})
         } catch (error) {
           logger.error('[handling submit]', error)
           Pop.error(error)

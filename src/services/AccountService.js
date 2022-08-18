@@ -1,12 +1,13 @@
 import { AppState } from '../AppState'
 import { Account } from '../models/Account'
 import { logger } from '../utils/Logger'
-import { api } from './AxiosService'
+import { bcwSandbox } from './AxiosService.js'
+
 
 class AccountService {
   async getAccount() {
     try {
-      const res = await api.get('/account')
+      const res = await bcwSandbox.get('/account')
       AppState.account = res.data
     } catch (err) {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
@@ -14,7 +15,7 @@ class AccountService {
   }
 
   async editAccount(accountData) {
-    const res = await api.put('/account', accountData)
+    const res = await bcwSandbox.put('/account', accountData)
     AppState.account = new Account(res.data)
   }
 }
