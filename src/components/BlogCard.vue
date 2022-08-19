@@ -3,18 +3,19 @@
         <router-link :to="{name: 'Blog', params: {blogId: blog.id}}">
         <div class="card-body">
             <div class="card-title">
-                <h6 class="text-dark">
-                    {{blog.title}} | {{new Date(blog.createdAt).toLocaleDateString('en-US')}}
-                </h6>
+                <div class="text-dark">
+                    <h3>{{blog.title}}</h3>
+                    <p m-0>{{new Date(blog.createdAt).toLocaleDateString('en-US')}}</p>
+                </div>
             </div>
         </div>
-        </router-link>
-
         <div class="blog-creator" v-if="blog.creator">
             <router-link :to="{name: 'Profile', params: {profileId: blog.creator.id}}">
                 <img class="img-fluid" :src="blog.creator.picture" alt="" :title="blog.creator.name">
             </router-link>
         </div>
+        </router-link>
+
     </div>
 </template>
 

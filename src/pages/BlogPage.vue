@@ -30,6 +30,7 @@ import BlogForm from '../components/BlogForm.vue';
 export default {
     setup() {
         const route = useRoute();
+
         async function getBlogById() {
             try {
                 await blogsService.getBlogById(route.params.blogId);
@@ -45,7 +46,8 @@ export default {
         return {
             blog: computed(() => AppState.activeBlog),
             adjustBlog(blog) {
-                blogsService.setActiveBlog(blog);
+                // TODO this might need to change, call to a form in order to make an edit
+                blogsService.editBlog(blog);
             },
             async deleteBlog(blog) {
                 try {
