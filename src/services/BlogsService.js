@@ -6,10 +6,9 @@ import { bcwSandbox } from "./AxiosService.js"
 
 class BlogsService {
     async editBlog(blogData){
-        let res = await bcwSandbox.put(`api/blogs/${blogData.id}`, blogData)
-        let blog = new Blog(res.data)
-        let blogIndex = AppState.blogs.findIndex(b => b.id == blogData.id)
-        AppState.blogs.splice(blogIndex, 1, blog)
+        const res = await bcwSandbox.put(`api/blogs/${blogData.id}`, blogData)
+        const index = AppState.blogs.findIndex(b => b.id == blogData.id)
+        AppState.blogs.splice(index, 1, new Blog(res.data))
     }
     async getBlogs(){
         const res = await bcwSandbox.get('/api/blogs')
@@ -22,8 +21,7 @@ class BlogsService {
         AppState.blogs.unshift(new Blog(res.data))
     }
     async deleteBlog(blogId){
-        let url = `api/blogs/${blogId}`
-        await bcwSandbox.delete(url)
+        const res = await bcwSandbox.delete(`api/blogs/${blogId}`)
         AppState.blogs = AppState.blogs.filter(b => b.id != blogId)
     }
     setActiveBlog(blog){

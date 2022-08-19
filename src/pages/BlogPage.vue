@@ -12,6 +12,10 @@
             <button class="btn btn-info" @click="adjustBlog(blog)">Edit Blog Post</button>
             <button class="btn btn-danger" @clock="deleteBlog(blog)">Delete Blog Post</button>
         </div>
+        <!-- <div v-if="blog.creator.id == account.id">
+            <button @click="toggleEdit">Edit</button>
+            <BlogForm v-if="editing" /> 
+        </div> -->
     </div>
 </div>
 </template>
@@ -44,11 +48,14 @@ export default {
             getBlogById();
         });
         return {
+            // editing,
             blog: computed(() => AppState.activeBlog),
-            adjustBlog(blog) {
-                // TODO this might need to change, call to a form in order to make an edit
-                blogsService.editBlog(blog);
-            },
+
+            // toggleEdit(){
+            //     AppState.activeBlog = props.blog
+            //     this.editing = !this.editing
+            // },
+
             async deleteBlog(blog) {
                 try {
                     const yes = await Pop.confirm("Delete the blog post?");
